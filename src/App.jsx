@@ -75,8 +75,8 @@ function App() {
 
 
   let icon
-/*data.weather[0].main*/
-  switch ('Clouds') {
+
+  switch (data.weather[0].main) {
     case 'Clouds':
       icon = <IoMdCloudy className='text-[#d7dadc]'/>
       break;
@@ -104,25 +104,25 @@ function App() {
 
   return (
 
-    <div className='w-full h-screen bg-gradientBg bg-no-repeat bg-cover flex flex-col items-center justify-center lg:px-0'>  
+    <div className='w-full h-screen  bg-gradientBg bg-no-repeat bg-cover flex flex-col items-center justify-center lg:px-0'>  
       {errorMsg && <div>{`${errorMsg.response.data.message}`}</div>}
       
     {/*form*/}
-      <form className={`${animate ? 'animate-shake' : 'animate-none'} h-16 bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] mb-8`}>
+      <form className={`${animate ? 'animate-shake' : 'animate-none'} h-16 sm:h-2px bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] sm:backdrop-blur-[8px] mb-8 sm:mb-[2px]`}>
         <div className='h-full relative flex items-center justify-between p-2'>
           <input  
             onChange={(e) => handleInput(e)}
-            className='flex-1 bg-transparent outline-none placeholder:text-white text-white text-[15px] font-light pl-6 h-full' type="text" placeholder='Search by city or country'
+            className='flex-1 bg-transparent outline-none placeholder:text-white text-white text-[15px] sm:text[6px]font-light pl-6 h-full sm:h-[6px]' type="text" placeholder='Search by city or country'
           />
           <button 
           onClick={(e) => handleSubmit(e)}
-          className='bg-[#1ab8ed] hover:bg-[#15abdd] w-20 h-12 rounded-full flex items-center justify-center transition'>
+          className='bg-[#1ab8ed] hover:bg-[#15abdd] w-20 h-12 sm:h-6 rounded-full flex items-center justify-center transition'>
             <MdSearch className='text-2xl text-white'/>
           </button>
         </div>
       </form>
       {/*card*/}  
-      <div className='w-full max-w-[450px] bg-black/20 min-h-[584px] text-white backdrop-blur-[32px] rounded-[32px] py-12 px-6'>
+      <div className='w-full max-w-[450px] bg-black/20 min-h-[584px] text-white backdrop-blur-[32px] rounded-[32px] py-12 px-6 sm:py-2px sm:px-2px '>
         {loading ? 
             ( <div className='w-full h-full flex justify-center items-center'>
                 <ImSpinner8 className='text-white text-5Xl animate-spin'/>
@@ -132,7 +132,7 @@ function App() {
             {/*card top*/}
             <div className='flex items-center gap-x-5'>
               {/*icon*/}
-                <div className='text-[87px]'>{icon}</div>
+                <div className='text-[87px] sm:text-[67px]'>{icon}</div>
                 <div>
                 {/*country name*/}
                 <div className='text-2xl font-semibold'>{data.name}, {data.sys.country}</div>
@@ -141,22 +141,25 @@ function App() {
                 </div>
             </div>
               {/*card body*/}
-            <div className='my-20'>
+            <div className='my-20 sm:my-[4px]'>
               <div className='flex justify-center'>
+                <div className='flex-col'>
                 {/*temp*/}
-                <div className='text-[144px] leading-none font-light'>{parseInt(data.main.temp)}</div>
-                {/*celsius icon*/}
-                <div className='text-4xl'>
-                  <TbTemperatureCelsius/>
+                <div className='text-[144px] sm:tex-[80px] leading-none font-light'>{parseInt(data.main.temp)}
                 </div>
-              </div>
-              {/*weahter description*/}
-              <div className='capitalize text-center'>{data.weather[0].description}</div>
+                </div>   
+               {/*celsius icon*/}
+                <div className='text-2xl flex justify-start'>
+                    <TbTemperatureCelsius/>
+                  </div>
+                </div>
+                {/*weahter description*/}
+                <div className='capitalize text-center'>{data.weather[0].description}</div> 
             </div>
               {/*card botton*/}
-            <div className='max-w-[378px] mx-auto flex flex-col gap-y-6'>
+            <div className='max-w-[378px] mx-auto flex flex-col gap-y-6 '>
               <div className='flex justify-between'>
-                <div className='flex items-center gap-x-2'>
+                <div className='flex items-center gap-x-2 p-2'>
                   {/*icon*/}
                   <div className='text-[20px]'>
                     <BsEye/>
@@ -167,7 +170,7 @@ function App() {
                     </span>
                   </div>
                 </div>
-                <div className='flex items-center gap-x-2'>
+                <div className='flex items-center gap-x-2 p-2'>
                   {/*icon*/}
                   <div className='text-[20px]'>
                     <BsThermometer/>
@@ -181,7 +184,7 @@ function App() {
                 </div>
               </div>
               <div className='flex justify-between'>
-                <div className='flex items-center gap-x-2'>
+                <div className='flex items-center gap-x-2 p-2'>
                   {/*icon*/}
                   <div className='text-[20px]'>
                     <BsWater/>
@@ -192,12 +195,12 @@ function App() {
                     </span>
                   </div>
                 </div>
-                <div className='flex items-center gap-x-2'>
+                <div className='flex items-center gap-x-2 p-2'>
                   {/*icon*/}
                   <div className='text-[20px]'>
                     <BsWind/>
                   </div>
-                  <div className='flex'>Wind
+                  <div className='flex ml-2'>Wind
                     <span className='flex ml-2'>
                       {data.wind.speed} m/s 
                     </span>
